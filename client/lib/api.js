@@ -1,7 +1,7 @@
 // Central place for all API calls to the backend.
 // Import this in any Next.js page/component: import { api } from "@/lib/api";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://marketplace-production-aa0f.up.railway.app/api";
 
 async function request(endpoint, { method = "GET", body, token } = {}) {
   const headers = { "Content-Type": "application/json" };
