@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #FBFAF7;
+  --line: #ECEAE3;
+}
+
+body {
+  color: #181A2A;
+  background: var(--paper);
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Baloo 2', sans-serif;
+}
