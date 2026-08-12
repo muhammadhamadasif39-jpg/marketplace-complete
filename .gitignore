@@ -4,3 +4,5 @@ uploads/
 .next/
 out/
 dist/
+# Local Netlify folder
+.netlify

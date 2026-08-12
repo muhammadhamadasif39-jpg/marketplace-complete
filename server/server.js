@@ -11,6 +11,7 @@ const { stripeWebhook } = require("./controllers/payment.controller");
 connectDB();
 
 const app = express();
+app.set("trust proxy", 1);
 
 // --- Stripe webhook: MUST be registered before express.json(), because Stripe's
 // signature verification needs the exact raw request bytes, not a parsed/re-serialized body.
@@ -19,6 +20,7 @@ app.post("/api/payments/stripe/webhook", express.raw({ type: "application/json" 
 // --- Core middleware ---
 app.use(express.json({ limit: "10mb" })); // parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // JazzCash/Easypaisa post back as form data, not JSON
+console.log("CLIENT_URL =", process.env.CLIENT_URL);
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:3000",
