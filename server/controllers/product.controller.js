@@ -118,6 +118,8 @@ const createProduct = async (req, res, next) => {
       stock: stock || 0,
       variants: variants || [],
       productType: productType || "physical",
+      isPublished: true,
+      isApproved: true,
     });
 
     res.status(201).json(product);
