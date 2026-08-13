@@ -11,16 +11,23 @@ const { stripeWebhook } = require("./controllers/payment.controller");
 connectDB();
 
 const app = express();
-app.set("trust proxy", 1);
+app.set("trust proxy", true);
+console.log("TRUST PROXY =", app.get("trust proxy"));
+
 
 // --- Stripe webhook: MUST be registered before express.json(), because Stripe's
 // signature verification needs the exact raw request bytes, not a parsed/re-serialized body.
-app.post("/api/payments/stripe/webhook", express.raw({ type: "application/json" }), stripeWebhook);
+app.post(
+  "/api/payments/stripe/webhook",
+  express.raw({ type: "application/json" }),
+  stripeWebhook
+);
 
 // --- Core middleware ---
 app.use(express.json({ limit: "10mb" })); // parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // JazzCash/Easypaisa post back as form data, not JSON
 console.log("CLIENT_URL =", process.env.CLIENT_URL);
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:3000",
@@ -37,8 +44,7 @@ const limiter = rateLimit({
     xForwardedForHeader: false,
   },
 });
-app.use("/api", limiter);
-
+app.set("trust proxy", 1);
 // --- Routes ---
 app.get("/", (req, res) => {
   res.json({ message: "Marketplace API is running 🚀" });
