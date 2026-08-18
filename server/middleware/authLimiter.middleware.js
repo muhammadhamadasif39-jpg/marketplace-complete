@@ -8,6 +8,9 @@ const authLimiter = rateLimit({
   message: { message: "Too many attempts, please try again in 15 minutes" },
   standardHeaders: true,
   legacyHeaders: false,
+  validate: {
+  xForwardedForHeader: false,
+},
 });
 
 module.exports = authLimiter;
