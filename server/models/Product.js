@@ -85,7 +85,7 @@ const productSchema = new mongoose.Schema(
       // New products need admin approval before showing up in public listings.
       // Sellers can still see their own unapproved products in their dashboard.
       type: Boolean,
-      default: false,
+      default: true,
     },
     reviews: [reviewSchema],
     rating: {

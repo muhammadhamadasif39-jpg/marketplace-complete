@@ -11,7 +11,7 @@ const { stripeWebhook } = require("./controllers/payment.controller");
 connectDB();
 
 const app = express();
-app.set("trust proxy", true);
+app.set("trust proxy", 1);
 console.log("TRUST PROXY =", app.get("trust proxy"));
 
 
